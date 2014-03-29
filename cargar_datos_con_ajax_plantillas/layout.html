@@ -1,5 +1,6 @@
 {% extends 'layout_tutos.html' %}
 
+
 {% block modales %}
 <div class="modal fade" id="registroLista" tabindex="-1" role="dialog" aria-labelledby="registroLista" aria-hidden="true">
   <div class="modal-dialog">
@@ -68,26 +69,26 @@
           </tr>
         </thead>
         <tbody id="listaRegFunciones">
-          {% for registroLista in lista_funciones %}
+        {% for lista in lista_funciones %}
           <tr>
-            <td>{{ registroLista.id_lista }}</td>
-            <td>{{ registroLista.lista_lenguaje }}</td>
-            <td><code>{{ registroLista.lista_funcion }}</code></td>
-            <td>{{ registroLista.lista_descripcion}}</td>
-            <td>{{ registroLista.lista_tips }}</td>
-            <td style="text-align:center;"><a href="#" class="btn btn-default btn-xs" data-id_lista="{{ registroLista.id_lista }}"> <span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
+            <td>{{ lista.id_lista }}</td>
+            <td>{{ lista.lista_lenguaje }}</td>
+            <td><code>{{ lista.lista_funcion }}</code></td>
+            <td>{{ lista.lista_descripcion }}</td>
+            <td>{{ lista.lista_tips }}</td>
+            <td style="text-align:center;"><a href="#" class="btn btn-default btn-xs" data-id_lista="{{lista.id_lista}}"> <span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
           </tr>
-          {% endfor %}
+        {% endfor %}
         </tbody>
       </table>
     </div>
 </div>
-
 {% endblock %}
+
 
 {% block javascripts %}
 <script>
-	$(function(){
+  $(function(){
     $('body').on('click', '#listaRegFunciones a', function(event) {
       event.preventDefault();
 
@@ -109,6 +110,9 @@
           $('#lista_descripcion').val(response.datos.lista_descripcion);
           $('#lista_tips').val(response.datos.lista_tips);
           $('#id_lista').val(response.datos.id_lista);
+          
+
+          $('#registroLista').modal('show');
 
         }else{
           alert(response.mensaje);
@@ -122,9 +126,9 @@
         console.log("complete");
       });
 
-      $('#registroLista').modal('show');
+      
     });
     
-	});
+  });
 </script>
 {% endblock %}

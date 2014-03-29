@@ -25,4 +25,25 @@ function getListaFunciones($dbLink){
 
 	return $response ;
 }
+
+
+// Función para extraer un registro de la lista
+function getFuncion($dbLink,$id_lista){
+
+	$datosRegistro = false;
+
+	$consulta = sprintf("SELECT id_lista, lista_lenguaje, lista_funcion, lista_descripcion, lista_tips
+						FROM funciones_lenguajes
+						WHERE id_lista=%d
+						LIMIT 1",$id_lista);
+
+	// Ejecutamos la cosnulta
+	$respuesta = $dbLink -> query($consulta);
+
+	if($respuesta -> num_rows != 0){
+		$datosRegistro = $respuesta -> fetch_assoc();	
+	}
+
+	return $datosRegistro;
+}
 ?>
